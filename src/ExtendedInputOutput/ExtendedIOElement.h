@@ -4,7 +4,11 @@
 #include "Arduino.h"
 #include "../Helpers/Linked_List.h"
 
-typedef unsigned int pin_t;
+#ifdef __AVR__
+typedef uint8_t pin_t;
+#else
+typedef uint16_t pin_t;
+#endif
 typedef int analog_t;
 
 class ExtendedIOElement

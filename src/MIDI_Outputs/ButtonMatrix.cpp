@@ -35,10 +35,10 @@ void ButtonMatrix<nb_rows, nb_cols>::refresh()
 
     for (int row = 0; row < nb_rows; row++) // scan through all rows
     {
-        pinMode(rowPins[row], OUTPUT);          // make the current row Lo-Z 0V
+        ExtIO::pinMode(rowPins[row], OUTPUT);          // make the current row Lo-Z 0V
         for (int col = 0; col < nb_cols; col++) // scan through all columns
         {
-            bool state = digitalRead(colPins[col]); // read the state
+            bool state = ExtIO::digitalRead(colPins[col]); // read the state
             if (state != getPrevState(col, row))    // if the state changed since last time
             {
                 // send it over MIDI
@@ -47,7 +47,7 @@ void ButtonMatrix<nb_rows, nb_cols>::refresh()
                 setPrevState(col, row, state); // remember the state
             }
         }
-        pinMode(rowPins[row], INPUT); // make the current row Hi-Z again
+        ExtIO::pinMode(rowPins[row], INPUT); // make the current row Hi-Z again
     }
 }
 
@@ -58,12 +58,12 @@ void ButtonMatrix<nb_rows, nb_cols>::init()
     memset(prevStates, 0xFF, (nb_cols * nb_rows + 7) / 8);
     for (int i = 0; i < nb_cols; i++)
     {
-        pinMode(colPins[i], INPUT_PULLUP); // make all columns input pins and enable the internal pull-up resistors
+        ExtIO::pinMode(colPins[i], INPUT_PULLUP); // make all columns input pins and enable the internal pull-up resistors
     }
     for (int row = 0; row < nb_rows; row++)
     {
-        pinMode(rowPins[row], INPUT);  // make all rows Hi-Z
-        digitalWrite(rowPins[row], 0); // disable the internal pull-up resistors
+        ExtIO::pinMode(rowPins[row], INPUT);  // make all rows Hi-Z
+        ExtIO::digitalWrite(rowPins[row], 0); // disable the internal pull-up resistors
     }
 }
 

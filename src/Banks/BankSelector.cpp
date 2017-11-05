@@ -13,7 +13,7 @@ void BankSelector::refresh()
     case SINGLE_SWITCH:
     case SINGLE_SWITCH_LED:
     {
-        newBankSetting = (uint8_t)(!digitalRead(switchPin));
+        newBankSetting = (uint8_t)(!ExtIO::digitalRead(switchPin));
     }
     break;
 
@@ -30,7 +30,7 @@ void BankSelector::refresh()
     {
         for (uint8_t i = 0; i < nb_settings; i++)
         {
-            if (digitalRead(switchPins[i]) == LOW)
+            if (ExtIO::digitalRead(switchPins[i]) == LOW)
             {
                 newBankSetting = i;
                 break;
@@ -110,7 +110,7 @@ void BankSelector::refreshLEDs(uint8_t newBankSetting)
     case SINGLE_SWITCH_LED:
     case SINGLE_BUTTON_LED:
     {
-        digitalWrite(ledPin, newBankSetting);
+        ExtIO::digitalWrite(ledPin, newBankSetting);
     }
     break;
 
@@ -118,8 +118,8 @@ void BankSelector::refreshLEDs(uint8_t newBankSetting)
     case INCREMENT_DECREMENT_LEDS:
     case INCREMENT_LEDS:
     {
-        digitalWrite(ledPins[bankSetting], LOW);
-        digitalWrite(ledPins[newBankSetting], HIGH);
+        ExtIO::digitalWrite(ledPins[bankSetting], LOW);
+        ExtIO::digitalWrite(ledPins[newBankSetting], HIGH);
     }
     break;
     }
@@ -128,7 +128,7 @@ void BankSelector::refreshLEDs(uint8_t newBankSetting)
 bool BankSelector::debounceButton(debouncedButton &button)
 {
     bool pressed = false;
-    bool state = digitalRead(button.pin);
+    bool state = ExtIO::digitalRead(button.pin);
 
     int8_t stateChange = state - button.prevState;
 

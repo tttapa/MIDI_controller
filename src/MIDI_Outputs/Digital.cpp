@@ -5,7 +5,7 @@ using namespace ExtIO;
 
 Digital::Digital(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity) // Constructor
 {
-  pinMode(pin, INPUT_PULLUP); // Enable the internal pull-up resistor on the pin with the button/switch
+  ExtIO::pinMode(pin, INPUT_PULLUP); // Enable the internal pull-up resistor on the pin with the button/switch
   this->pin = pin;
   this->note = note;
   this->channel = channel;
@@ -14,7 +14,7 @@ Digital::Digital(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity) // 
 
 Digital::~Digital() // Destructor
 {
-  pinMode(pin, INPUT); // make it a normal input again, without the internal pullup resistor.
+  ExtIO::pinMode(pin, INPUT); // make it a normal input again, without the internal pullup resistor.
 }
 
 void Digital::invert() // Invert the button state (send Note On event when released, Note Off when pressed)
@@ -24,7 +24,7 @@ void Digital::invert() // Invert the button state (send Note On event when relea
 
 void Digital::refresh() // Check if the button state changed, and send a MIDI Note On or Off accordingly
 {
-  bool state = digitalRead(pin) ^ invertState; // read the button state and invert it if "invert" is true
+  bool state = ExtIO::digitalRead(pin) ^ invertState; // read the button state and invert it if "invert" is true
 
   if (millis() - prevBounceTime > debounceTime)
   {

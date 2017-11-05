@@ -33,7 +33,7 @@ void pinMode(pin_t pin, uint8_t mode)
 }
 void pinMode(int pin, uint8_t mode)
 {
-    pinMode((pin_t)pin, mode);
+    ExtIO::pinMode((pin_t)pin, mode);
 }
 void digitalWrite(pin_t pin, uint8_t val)
 {
@@ -55,7 +55,7 @@ void digitalWrite(pin_t pin, uint8_t val)
 }
 void digitalWrite(int pin, uint8_t val)
 {
-    digitalWrite((pin_t)pin, val);
+    ExtIO::digitalWrite((pin_t)pin, val);
 }
 int digitalRead(pin_t pin)
 {
@@ -76,7 +76,7 @@ int digitalRead(pin_t pin)
 }
 int digitalRead(int pin)
 {
-    return digitalRead((pin_t)pin);
+    return ExtIO::digitalRead((pin_t)pin);
 }
 void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder, uint8_t val)
 {
@@ -85,17 +85,17 @@ void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder, uint8_t val)
     for (i = 0; i < 8; i++)
     {
         if (bitOrder == LSBFIRST)
-            digitalWrite(dataPin, !!(val & (1 << i)));
+            ExtIO::digitalWrite(dataPin, !!(val & (1 << i)));
         else
-            digitalWrite(dataPin, !!(val & (1 << (7 - i))));
+            ExtIO::digitalWrite(dataPin, !!(val & (1 << (7 - i))));
 
-        digitalWrite(clockPin, HIGH);
-        digitalWrite(clockPin, LOW);
+        ExtIO::digitalWrite(clockPin, HIGH);
+        ExtIO::digitalWrite(clockPin, LOW);
     }
 }
 void shiftOut(int dataPin, int clockPin, uint8_t bitOrder, uint8_t val)
 {
-    shiftOut((pin_t)dataPin, (pin_t)clockPin, bitOrder, val);
+    ExtIO::shiftOut((pin_t)dataPin, (pin_t)clockPin, bitOrder, val);
 }
 analog_t analogRead(pin_t pin)
 {
@@ -113,5 +113,8 @@ analog_t analogRead(pin_t pin)
             return el->analogRead(pin - el->getStart());
     }
     return 0;
+}
+analog_t analogRead(int pin) {
+    return ExtIO::analogRead((pin_t)pin);
 }
 };

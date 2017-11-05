@@ -161,7 +161,7 @@ public:
       dbButton1.pin = switchPin;
       mode = SINGLE_BUTTON;
     }
-    pinMode(switchPin, INPUT_PULLUP);
+    ExtIO::pinMode(switchPin, INPUT_PULLUP);
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
   BankSelector(Bank &bank, pin_t switchPin, pin_t ledPin, buttonType buttonType = MOMENTARY) // One switch or button, one LED
@@ -176,8 +176,8 @@ public:
       dbButton1.pin = switchPin;
       mode = SINGLE_BUTTON_LED;
     }
-    pinMode(switchPin, INPUT_PULLUP);
-    pinMode(ledPin, OUTPUT);
+    ExtIO::pinMode(switchPin, INPUT_PULLUP);
+    ExtIO::pinMode(ledPin, OUTPUT);
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
   template <size_t N>
@@ -186,7 +186,7 @@ public:
   {
     mode = MULTIPLE_BUTTONS;
     for (uint8_t i = 0; i < nb_settings; i++)
-      pinMode(this->switchPins[i], INPUT_PULLUP);
+      ExtIO::pinMode(this->switchPins[i], INPUT_PULLUP);
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
   BankSelector(Bank &bank, std::initializer_list<pin_t> switchPins) // Multiple buttons, no LEDs
@@ -197,7 +197,7 @@ public:
     this->switchPins = switchPinsStorage;
     mode = MULTIPLE_BUTTONS;
     for (uint8_t i = 0; i < nb_settings; i++)
-      pinMode(this->switchPins[i], INPUT_PULLUP);
+      ExtIO::pinMode(this->switchPins[i], INPUT_PULLUP);
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
   template <size_t M, size_t N>
@@ -208,15 +208,15 @@ public:
     {
       dbButton1.pin = this->switchPins[0];
       mode = INCREMENT_LEDS;
-      pinMode(dbButton1.pin, INPUT_PULLUP);
+      ExtIO::pinMode(dbButton1.pin, INPUT_PULLUP);
     }
     else if (M == 2)
     {
       dbButton1.pin = this->switchPins[0];
       dbButton2.pin = this->switchPins[1];
       mode = INCREMENT_DECREMENT_LEDS;
-      pinMode(dbButton1.pin, INPUT_PULLUP);
-      pinMode(dbButton2.pin, INPUT_PULLUP);
+      ExtIO::pinMode(dbButton1.pin, INPUT_PULLUP);
+      ExtIO::pinMode(dbButton2.pin, INPUT_PULLUP);
     }
     else
     {
@@ -224,14 +224,14 @@ public:
       nb_settings = N < M ? N : M; // min(N, M)
       for (uint8_t i = 0; i < nb_settings; i++)
       {
-        pinMode(switchPins[i], INPUT_PULLUP);
+        ExtIO::pinMode(switchPins[i], INPUT_PULLUP);
       }
     }
     for (uint8_t i = 0; i < nb_settings; i++)
     {
-      pinMode(this->ledPins[i], OUTPUT);
+      ExtIO::pinMode(this->ledPins[i], OUTPUT);
     }
-    digitalWrite(ledPins[0], HIGH);
+    ExtIO::digitalWrite(ledPins[0], HIGH);
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
   BankSelector(Bank &bank, std::initializer_list<pin_t> switchPins, std::initializer_list<pin_t> ledPins) // One or multiple buttons, multiple LEDs
@@ -246,15 +246,15 @@ public:
     {
       dbButton1.pin = ((pin_t *)switchPins.begin())[0];
       mode = INCREMENT_LEDS;
-      pinMode(dbButton1.pin, INPUT_PULLUP);
+      ExtIO::pinMode(dbButton1.pin, INPUT_PULLUP);
     }
     else if (switchPins.size() == 2)
     {
       dbButton1.pin = ((pin_t *)switchPins.begin())[0];
       dbButton2.pin = ((pin_t *)switchPins.begin())[1];
       mode = INCREMENT_DECREMENT_LEDS;
-      pinMode(dbButton1.pin, INPUT_PULLUP);
-      pinMode(dbButton2.pin, INPUT_PULLUP);
+      ExtIO::pinMode(dbButton1.pin, INPUT_PULLUP);
+      ExtIO::pinMode(dbButton2.pin, INPUT_PULLUP);
     }
     else
     {
@@ -265,14 +265,14 @@ public:
       nb_settings = switchPins.size() < ledPins.size() ? switchPins.size() : ledPins.size(); // min(ledPins.size(), switchPins.size())
       for (uint8_t i = 0; i < nb_settings; i++)
       {
-        pinMode(this->switchPins[i], INPUT_PULLUP);
+        ExtIO::pinMode(this->switchPins[i], INPUT_PULLUP);
       }
     }
     for (uint8_t i = 0; i < nb_settings; i++)
     {
-      pinMode(this->ledPins[i], OUTPUT);
+      ExtIO::pinMode(this->ledPins[i], OUTPUT);
     }
-    digitalWrite(this->ledPins[0], HIGH);
+    ExtIO::digitalWrite(this->ledPins[0], HIGH);
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
   BankSelector(Bank &bank, const pin_t (&switchPins)[2], pin_t nb_settings) // Two buttons (+1, -1), no LEDs
@@ -281,8 +281,8 @@ public:
     dbButton1.pin = switchPins[0];
     dbButton2.pin = switchPins[1];
     mode = INCREMENT_DECREMENT;
-    pinMode(dbButton1.pin, INPUT_PULLUP);
-    pinMode(dbButton2.pin, INPUT_PULLUP);
+    ExtIO::pinMode(dbButton1.pin, INPUT_PULLUP);
+    ExtIO::pinMode(dbButton2.pin, INPUT_PULLUP);
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
   BankSelector(Bank &bank, const pin_t (&switchPins)[1], pin_t nb_settings) // One button (+1), no LEDs
@@ -290,7 +290,7 @@ public:
   {
     dbButton1.pin = switchPins[0];
     mode = INCREMENT;
-    pinMode(dbButton1.pin, INPUT_PULLUP);
+    ExtIO::pinMode(dbButton1.pin, INPUT_PULLUP);
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
   BankSelector(Bank &bank, std::initializer_list<pin_t> switchPins, pin_t nb_settings) // One or two buttons (+1, (-1)), no LEDs
@@ -300,15 +300,15 @@ public:
     {
       dbButton1.pin = ((pin_t *)switchPins.begin())[0];
       mode = INCREMENT;
-      pinMode(dbButton1.pin, INPUT_PULLUP);
+      ExtIO::pinMode(dbButton1.pin, INPUT_PULLUP);
     }
     else if (switchPins.size() == 2)
     {
       dbButton1.pin = ((pin_t *)switchPins.begin())[0];
       dbButton2.pin = ((pin_t *)switchPins.begin())[1];
       mode = INCREMENT_DECREMENT;
-      pinMode(dbButton1.pin, INPUT_PULLUP);
-      pinMode(dbButton2.pin, INPUT_PULLUP);
+      ExtIO::pinMode(dbButton1.pin, INPUT_PULLUP);
+      ExtIO::pinMode(dbButton2.pin, INPUT_PULLUP);
     }
     INSERT_INTO_LINKED_LIST(this, first, last);
   }

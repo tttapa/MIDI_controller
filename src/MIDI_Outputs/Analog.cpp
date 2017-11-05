@@ -13,8 +13,8 @@ Analog::Analog(pin_t analogPin, uint8_t controllerNumber, uint8_t channel) // Co
 
 void Analog::refresh() // read the analog value, update the average, map it to a MIDI value, check if it changed since last time, if so, send Control Change message over MIDI
 {
-  unsigned int input = analogRead(analogPin); // read the raw analog input value
-  input = analogMap(input);                   // apply the analogMap function to the value (identity function f(x) = x by default)
+  unsigned int input = ExtIO::analogRead(analogPin); // read the raw analog input value
+  input = analogMap(input);                          // apply the analogMap function to the value (identity function f(x) = x by default)
 
 #ifdef SINGLE_BYTE_AVERAGE       // use 8-bit value for averaging
   uint8_t value = input >> 2;    // map from the 10-bit analog input value [0, 1023] to the 8-bit value [0, 255]

@@ -11,8 +11,8 @@ AnalogHiRes::AnalogHiRes(pin_t analogPin, uint8_t channel) // Constructor
 
 void AnalogHiRes::refresh() // read the analog value, update the average, map it to a MIDI value, check if it changed since last time, if so, send Control Change message over MIDI
 {
-  analogRead(analogPin); // throw away first analog reading
-  analog_t input = analogRead(analogPin);
+  ExtIO::analogRead(analogPin); // throw away first analog reading
+  analog_t input = ExtIO::analogRead(analogPin);
   uint16_t value = analogMap(input) << 4; // apply the analogMap function to the value (identity function f(x) = x by default) and make it a 14-bit number (pad with 4 zeros)
 
   value = runningAverage(value); // update the running average with the new value
