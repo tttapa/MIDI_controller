@@ -6,7 +6,6 @@
 #include "Settings/Settings.h"
 
 #define MIDI_BAUD 31250
-#define HAIRLESS_BAUD 115200
 
 // #define IGNORE_SYSEX
 

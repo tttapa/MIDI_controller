@@ -6,3 +6,5 @@
 #define SINGLE_BYTE_AVERAGE // Save only the 8 most significant bits of the analog values in the Analog average buffer instead of 10. Only takes up half the memory.
 
 #define BUTTON_DEBOUNCE_TIME 25 // The debounce time for momentary push buttons
+
+#define HAIRLESS_BAUD 115200
