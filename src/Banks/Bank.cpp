@@ -47,7 +47,7 @@ void Bank::setBankSetting(uint8_t bankSetting)
     }
 }
 
-void Bank::map(int (*fn)(int))
+void Bank::map(int (*fn)(int, int))
 {
     MIDI_Element_list_node *element = firstMIDI_Element;
     while (element != nullptr)
