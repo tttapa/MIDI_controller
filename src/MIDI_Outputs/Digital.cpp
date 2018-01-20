@@ -28,7 +28,7 @@ void Digital::refresh() // Check if the button state changed, and send a MIDI No
 
   if (millis() - prevBounceTime > debounceTime)
   {
-    int8_t stateChange = digitalMap(state) - buttonState;
+    int8_t stateChange = digitalMap(pin, state) - buttonState;
 
     if (stateChange == falling)
     { // Button is pushed
@@ -49,7 +49,7 @@ void Digital::refresh() // Check if the button state changed, and send a MIDI No
   }
 }
 
-void Digital::map(int (*fn)(int)) // change the function pointer for digitalMap to a new function. It will be applied to the raw digital input value in Digital::refresh()
+void Digital::map(int (*fn)(int, int)) // change the function pointer for digitalMap to a new function. It will be applied to the raw digital input value in Digital::refresh()
 {
   digitalMap = fn;
 }

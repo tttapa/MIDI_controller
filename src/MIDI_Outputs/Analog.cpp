@@ -11,10 +11,16 @@ Analog::Analog(pin_t analogPin, uint8_t controllerNumber, uint8_t channel) // Co
   this->channel = channel;
 }
 
+void Analog::invert() // Invert the button state (send Note On event when released, Note Off when pressed)
+{
+  invertState = true;
+}
+
 void Analog::refresh() // read the analog value, update the average, map it to a MIDI value, check if it changed since last time, if so, send Control Change message over MIDI
 {
   unsigned int input = ExtIO::analogRead(analogPin); // read the raw analog input value
-  input = analogMap(input);                          // apply the analogMap function to the value (identity function f(x) = x by default)
+  if (invertState) input = 1023-input;				 // invert the scale
+  input = analogMap(analogPin, input);                     // apply the analogMap function to the value (identity function f(x) = x by default)
 
 #ifdef SINGLE_BYTE_AVERAGE       // use 8-bit value for averaging
   uint8_t value = input >> 2;    // map from the 10-bit analog input value [0, 1023] to the 8-bit value [0, 255]
@@ -31,7 +37,7 @@ void Analog::refresh() // read the analog value, update the average, map it to a
   }
 }
 
-void Analog::map(int (*fn)(int)) // change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
+void Analog::map(int (*fn)(int, int)) // change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
 {
   analogMap = fn;
 }

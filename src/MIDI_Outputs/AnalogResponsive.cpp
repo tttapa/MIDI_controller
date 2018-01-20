@@ -26,7 +26,7 @@ void AnalogResponsive::refresh() // read the analog value, update the average, m
 {
   unsigned int input = ExtIO::analogRead(analogPin); // read the raw analog input value
   if (invertState) input = 1023-input;				 // invert the scale
-  uint16_t value = analogMap(input); 				 // apply the analogMap function to the value (identity function f(x) = x by default)
+  uint16_t value = analogMap(analogPin, input); 				 // apply the analogMap function to the value (identity function f(x) = x by default)
   respAnalog->update(value); 						 // update the responsive analog average
   if (respAnalog->hasChanged()) 				 	 // if the value changed since last time
   {
@@ -35,7 +35,7 @@ void AnalogResponsive::refresh() // read the analog value, update the average, m
   }
 }
 
-void AnalogResponsive::map(int (*fn)(int)) // change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
+void AnalogResponsive::map(int (*fn)(int, int)) // change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
 {
   analogMap = fn;
 }

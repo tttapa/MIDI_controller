@@ -12,13 +12,13 @@ public:
   Digital(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity = 127); // Constructor
   ~Digital();                                                                // Destructor
   void invert();                                                             // Invert the button state (send Note On event when released, Note Off when pressed)
-  void map(int (*fn)(int));                                           		 // Change the function pointer for digitalMap to a new function. It will be applied to the raw digital input value in Digital::refresh()
+  void map(int (*fn)(int, int));                                       	 // Change the function pointer for digitalMap to a new function. It will be applied to the raw digital input value in Digital::refresh()
 
 private:
   void refresh(); // Check if the button state changed, and send a MIDI Note On or Off accordingly
-  int (*digitalMap)(int) = identity; // function pointer to identity function f(x) → x
+  int (*digitalMap)(int, int) = identity; // function pointer to identity function f(x) → x
 
-  static int identity(int x)
+  static int identity(int p, int x)
   { // identity function f(x) → x
     return x;
   }
