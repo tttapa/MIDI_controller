@@ -18,6 +18,38 @@ Digital::~Digital() // Destructor
   ExtIO::pinMode(pin, INPUT); // make it a normal input again, without the internal pullup resistor.
 }
 
+void Digital::push() //
+{
+	switch (msg) {
+		case NOTE_ON:
+			MIDI_Controller.MIDI()->send(NOTE_ON, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
+			break;
+		case CONTROL_CHANGE:
+			MIDI_Controller.MIDI()->send(CONTROL_CHANGE, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, 127);
+			break;
+		case PROGRAM_CHANGE:
+			if (!invertState)
+				MIDI_Controller.MIDI()->send(PROGRAM_CHANGE, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank);
+			break;
+	}
+}
+
+void Digital::release() //
+{
+	switch (msg) {
+		case NOTE_ON:
+			MIDI_Controller.MIDI()->send(NOTE_OFF, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
+			break;
+		case CONTROL_CHANGE:
+			MIDI_Controller.MIDI()->send(CONTROL_CHANGE, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, 0);
+			break;
+		case PROGRAM_CHANGE:
+			if (invertState)
+				MIDI_Controller.MIDI()->send(PROGRAM_CHANGE, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank);
+			break;
+	}
+}
+
 void Digital::invert() // Invert the button state (send Note On event when released, Note Off when pressed)
 {
   invertState = true;
@@ -34,35 +66,13 @@ void Digital::refresh() // Check if the button state changed, and send a MIDI No
     if (stateChange == falling)
     { // Button is pushed
       buttonState = state;
-	  switch (msg) {
-		case NOTE_ON:
-			MIDI_Controller.MIDI()->send(NOTE_ON, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
-			break;
-		case CONTROL_CHANGE:
-			MIDI_Controller.MIDI()->send(CONTROL_CHANGE, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, 127);
-			break;
-		case PROGRAM_CHANGE:
-			if (!invertState)
-				MIDI_Controller.MIDI()->send(PROGRAM_CHANGE, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank);
-			break;
-	  }
+	  this->push();
     }
 
     if (stateChange == rising)
     { // Button is released
       buttonState = state;
-	  switch (msg) {
-		case NOTE_ON:
-			MIDI_Controller.MIDI()->send(NOTE_OFF, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
-			break;
-		case CONTROL_CHANGE:
-			MIDI_Controller.MIDI()->send(CONTROL_CHANGE, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, 0);
-			break;
-		case PROGRAM_CHANGE:
-			if (invertState)
-				MIDI_Controller.MIDI()->send(PROGRAM_CHANGE, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank);
-			break;
-	  }
+	  this->release();
     }
   }
   if (state != prevState)

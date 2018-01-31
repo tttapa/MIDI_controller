@@ -10,6 +10,8 @@ class Analog : public MIDI_Control_Element
 {
 public:
   Analog(pin_t analogPin, uint8_t controllerNumber, uint8_t channel); // Constructor
+  void push();
+  void release();
   void invert();                                                      // Invert the analog scale
   void map(int (*fn)(int, int));                                           // Change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
 

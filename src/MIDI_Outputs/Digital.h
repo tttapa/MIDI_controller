@@ -10,8 +10,10 @@ class Digital : public MIDI_Control_Element
 {
 public:
   Digital(pin_t pin, uint8_t msg, uint8_t note, uint8_t channel, uint8_t velocity = 127); // Constructor
-  ~Digital();                                                                // Destructor
-  void invert();                                                             // Invert the button state (send Note On event when released, Note Off when pressed)
+  ~Digital();                                                                			  // Destructor
+  void push();
+  void release();
+  void invert();                                                         // Invert the button state (send Note On event when released, Note Off when pressed)
   void map(int (*fn)(int, int));                                       	 // Change the function pointer for digitalMap to a new function. It will be applied to the raw digital input value in Digital::refresh()
 
 private:

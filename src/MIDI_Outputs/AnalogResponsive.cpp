@@ -17,6 +17,16 @@ AnalogResponsive::~AnalogResponsive() // Destructor
   delete respAnalog;
 }
 
+void AnalogResponsive::push() //
+{
+	MIDI_Controller.MIDI()->send(CC, channel + channelOffset * channelsPerBank, controllerNumber + addressOffset * channelsPerBank, 1023); // send a Control Change MIDI event
+}
+
+void AnalogResponsive::release() //
+{
+	MIDI_Controller.MIDI()->send(CC, channel + channelOffset * channelsPerBank, controllerNumber + addressOffset * channelsPerBank, 0); // send a Control Change MIDI event
+}
+
 void AnalogResponsive::invert() // Invert the button state (send Note On event when released, Note Off when pressed)
 {
   invertState = true;
@@ -26,7 +36,7 @@ void AnalogResponsive::refresh() // read the analog value, update the average, m
 {
   unsigned int input = ExtIO::analogRead(analogPin); // read the raw analog input value
   if (invertState) input = 1023-input;				 // invert the scale
-  uint16_t value = analogMap(analogPin, input); 				 // apply the analogMap function to the value (identity function f(x) = x by default)
+  uint16_t value = analogMap(analogPin, input); 	 // apply the analogMap function to the value (identity function f(x) = x by default)
   respAnalog->update(value); 						 // update the responsive analog average
   if (respAnalog->hasChanged()) 				 	 // if the value changed since last time
   {

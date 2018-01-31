@@ -18,7 +18,9 @@ public:
   {
     DELETE_FROM_LINKED_LIST(this, first, last);
   }
-
+	
+  virtual void push() {}
+  virtual void release() {}
   virtual void map(int (*fn)(int, int)) {} // Change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh() and AnalogHiRes::refresh()
   virtual void invert() {}            // Invert the button state (send Note On event when released, Note Off when pressed). It will be applied in Digital::refresh()
 
