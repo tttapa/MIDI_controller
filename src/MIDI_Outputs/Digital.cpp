@@ -31,6 +31,9 @@ void Digital::push() //
 			if (!invertState)
 				MIDI_Controller.MIDI()->send(PROGRAM_CHANGE, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank);
 			break;
+		case PITCH_BEND:
+			MIDI_Controller.MIDI()->send(PITCH_BEND, channel + channelOffset * channelsPerBank, 127, note + addressOffset * channelsPerBank);
+			break;
 	}
 }
 
@@ -46,6 +49,9 @@ void Digital::release() //
 		case PROGRAM_CHANGE:
 			if (invertState)
 				MIDI_Controller.MIDI()->send(PROGRAM_CHANGE, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank);
+			break;
+		case PITCH_BEND:
+			MIDI_Controller.MIDI()->send(PITCH_BEND, channel + channelOffset * channelsPerBank, 0, note + addressOffset * channelsPerBank);
 			break;
 	}
 }
