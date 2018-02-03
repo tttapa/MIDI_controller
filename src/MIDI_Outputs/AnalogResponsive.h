@@ -10,10 +10,10 @@
 class AnalogResponsive : public MIDI_Control_Element
 {
 public:
-  AnalogResponsive(pin_t analogPin, uint8_t controllerNumber, uint8_t channel); // Constructor
+  AnalogResponsive(pin_t analogPin, uint8_t msg, uint8_t controllerNumber, uint8_t channel); // Constructor
   ~AnalogResponsive();                                                          // Destructor
-  void push();
-  void release();
+  void push(uint16_t value = 0x4000);
+  void release(uint16_t value = 0);
   void invert();                                                      	// Invert the analog scale
   void map(int (*fn)(int, int));                                        // Change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
 
@@ -22,7 +22,7 @@ private:
 
   ResponsiveAnalogRead *respAnalog;
   pin_t analogPin;
-  uint8_t controllerNumber, channel, oldVal = -1;
+  uint8_t msg, controllerNumber, channel, oldVal = -1;
   int (*analogMap)(int, int) = identity; // function pointer to identity function f(x) → x
 
   static int identity(int p, int x)

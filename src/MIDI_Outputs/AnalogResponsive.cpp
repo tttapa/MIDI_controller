@@ -4,9 +4,10 @@
 
 using namespace ExtIO;
 
-AnalogResponsive::AnalogResponsive(pin_t analogPin, uint8_t controllerNumber, uint8_t channel) // Constructor
+AnalogResponsive::AnalogResponsive(pin_t analogPin, uint8_t msg, uint8_t controllerNumber, uint8_t channel) // Constructor
 {
   this->analogPin = analogPin;
+  this->msg = msg;
   this->controllerNumber = controllerNumber;
   this->channel = channel;
   this->respAnalog = new ResponsiveAnalogRead(analogPin, true);
@@ -17,14 +18,27 @@ AnalogResponsive::~AnalogResponsive() // Destructor
   delete respAnalog;
 }
 
-void AnalogResponsive::push() //
+void AnalogResponsive::push(uint16_t value) //
 {
-	MIDI_Controller.MIDI()->send(CC, channel + channelOffset * channelsPerBank, controllerNumber + addressOffset * channelsPerBank, 1023); // send a Control Change MIDI event
+	switch (msg) {
+		case NOTE_ON:
+			MIDI_Controller.MIDI()->send(NOTE_ON, channel + channelOffset * channelsPerBank, value, 127);
+			break;
+		case CONTROL_CHANGE:
+			MIDI_Controller.MIDI()->send(CONTROL_CHANGE, channel + channelOffset * channelsPerBank, controllerNumber + addressOffset * channelsPerBank, value);
+			break;
+		case PROGRAM_CHANGE:
+			MIDI_Controller.MIDI()->send(PROGRAM_CHANGE, channel + channelOffset * channelsPerBank, value);
+			break;
+		case PITCH_BEND:
+			MIDI_Controller.MIDI()->send(PITCH_BEND, channel + channelOffset * channelsPerBank, value, value >> 7);
+			break; 
+	}
 }
 
-void AnalogResponsive::release() //
+void AnalogResponsive::release(uint16_t value) //
 {
-	MIDI_Controller.MIDI()->send(CC, channel + channelOffset * channelsPerBank, controllerNumber + addressOffset * channelsPerBank, 0); // send a Control Change MIDI event
+	this->push(value);
 }
 
 void AnalogResponsive::invert() // Invert the button state (send Note On event when released, Note Off when pressed)
@@ -41,7 +55,11 @@ void AnalogResponsive::refresh() // read the analog value, update the average, m
   if (respAnalog->hasChanged()) 				 	 // if the value changed since last time
   {
     value = respAnalog->getValue(); // get the responsive analog average value
-	MIDI_Controller.MIDI()->send(CC, channel + channelOffset * channelsPerBank, controllerNumber + addressOffset * channelsPerBank, value); // send a Control Change MIDI event
+	if ( msg == PITCH_BEND)
+	{
+		value = value << 4; // make it a 14-bit number (pad with 4 zeros)		
+	}
+	this->push(value);				// send a MIDI event
   }
 }
 
