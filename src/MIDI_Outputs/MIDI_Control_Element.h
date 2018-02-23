@@ -14,7 +14,7 @@ public:
   {
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
-  ~MIDI_Control_Element() // Destructor
+  virtual ~MIDI_Control_Element() // Destructor
   {
     DELETE_FROM_LINKED_LIST(this, first, last);
   }
