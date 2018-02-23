@@ -1,5 +1,5 @@
 #include "Arduino.h"
-#include <AnalogResponsive.h>
+#include "AnalogResponsive.h"
 #include "MIDI_Controller.h"
 
 using namespace ExtIO;
