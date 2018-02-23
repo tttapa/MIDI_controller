@@ -16,7 +16,6 @@ AnalogResponsive::AnalogResponsive(pin_t analogPin, uint8_t msg, uint8_t control
 AnalogResponsive::~AnalogResponsive() // Destructor
 {
   delete respAnalog;
-  DELETE_FROM_LINKED_LIST(this, first, last);
 }
 
 void AnalogResponsive::push(uint16_t value) //
