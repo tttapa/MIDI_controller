@@ -14,12 +14,14 @@ public:
   {
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
-  ~MIDI_Control_Element() // Destructor
+  virtual ~MIDI_Control_Element() // Destructor
   {
     DELETE_FROM_LINKED_LIST(this, first, last);
   }
-
-  virtual void map(int (*fn)(int)) {} // Change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh() and AnalogHiRes::refresh()
+	
+  virtual void push() {}
+  virtual void release() {}
+  virtual void map(int (*fn)(int, int)) {} // Change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh() and AnalogHiRes::refresh()
   virtual void invert() {}            // Invert the button state (send Note On event when released, Note Off when pressed). It will be applied in Digital::refresh()
 
   void setChannelOffset(uint8_t offset);     // Set the channel offset

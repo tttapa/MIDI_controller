@@ -26,7 +26,7 @@ public:
   }
 
   void setBankSetting(uint8_t bankSetting);
-  void map(int (*fn)(int));
+  void map(int (*fn)(int, int));
 
 private:
   const uint8_t channelsPerBank;
