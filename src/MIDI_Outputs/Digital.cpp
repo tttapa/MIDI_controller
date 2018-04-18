@@ -30,14 +30,14 @@ void Digital::refresh() // Check if the button state changed, and send a MIDI No
   {
     int8_t stateChange = state - buttonState;
 
-    if (stateChange == falling)
-    { // Button is pushed
+    if (stateChange == falling) // Button is pushed
+    {
       buttonState = state;
       MIDI_Controller.MIDI()->send(NOTE_ON, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
     }
 
-    if (stateChange == rising)
-    { // Button is released
+    if (stateChange == rising) // Button is released
+    {
       buttonState = state;
       MIDI_Controller.MIDI()->send(NOTE_OFF, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
     }

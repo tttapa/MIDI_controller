@@ -30,11 +30,17 @@ void Analog::refresh() // read the analog value, update the average, map it to a
     oldVal = value;
   }
 }
-
+#if defined(__arm__)
+namespace std {void __throw_bad_function_call() { while(1); }; }
+void Analog::map(std::function<int(int)> fn) {
+  analogMap = fn;
+}
+#else
 void Analog::map(int (*fn)(int)) // change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
 {
   analogMap = fn;
 }
+#endif
 #ifdef SINGLE_BYTE_AVERAGE
 uint8_t Analog::runningAverage(uint8_t value) // http://playground.arduino.cc/Main/RunningAverage
 #else
