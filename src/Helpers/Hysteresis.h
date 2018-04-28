@@ -11,7 +11,7 @@ class Hysteresis
   private:
     uint8_t previousLevel = 0;
     const static uint8_t shiftFac = 3;
-    const static uint8_t margin = 1 << shiftFac - 1;
+    const static uint8_t margin = (1 << shiftFac) - 1;
 };
 
 #endif

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<MIDICUSTOMCONTROLSURFACE name="Arduino" eatsMidi="0" channels="8" parameters="18">
+  <MAPPING id="65543" channel="1" function="1800" note="-1"/>
+  <MAPPING id="65543" channel="2" function="1801" note="-1"/>
+  <MAPPING id="65543" channel="3" function="1802" note="-1"/>
+  <MAPPING id="65543" channel="4" function="1803" note="-1"/>
+  <MAPPING id="65543" channel="5" function="1804" note="-1"/>
+  <MAPPING id="65543" channel="6" function="1805" note="-1"/>
+  <MAPPING id="65543" channel="7" function="1806" note="-1"/>
+  <MAPPING id="65543" channel="8" function="1807" note="-1"/>
+  <MAPPING id="0" channel="1" function="1100" note="20"/>
+  <MAPPING id="0" channel="1" function="1101" note="21"/>
+  <MAPPING id="0" channel="1" function="1102" note="22"/>
+  <MAPPING id="0" channel="1" function="1103" note="23"/>
+  <MAPPING id="0" channel="1" function="1104" note="16"/>
+  <MAPPING id="0" channel="1" function="1105" note="17"/>
+  <MAPPING id="0" channel="1" function="1106" note="18"/>
+  <MAPPING id="0" channel="1" function="1107" note="19"/>
+  <MAPPING id="65583" channel="1" function="20" note="-1"/>
+  <MAPPING id="65546" channel="1" function="1700" note="-1"/>
+  <MAPPING id="65546" channel="2" function="1701" note="-1"/>
+  <MAPPING id="65546" channel="3" function="1702" note="-1"/>
+  <MAPPING id="65546" channel="4" function="1703" note="-1"/>
+  <MAPPING id="65546" channel="5" function="1704" note="-1"/>
+  <MAPPING id="65546" channel="6" function="1705" note="-1"/>
+  <MAPPING id="65546" channel="7" function="1706" note="-1"/>
+  <MAPPING id="65546" channel="8" function="1707" note="-1"/>
+  <MAPPING id="65555" channel="1" function="1601" note="-1"/>
+  <MAPPING id="65554" channel="1" function="1604" note="-1"/>
+  <MAPPING id="65553" channel="1" function="1607" note="-1"/>
+  <MAPPING id="65552" channel="1" function="1610" note="-1"/>
+</MIDICUSTOMCONTROLSURFACE>

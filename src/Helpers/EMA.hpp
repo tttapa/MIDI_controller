@@ -10,7 +10,6 @@ class EMA
     int_t filter(int_t value)
     {
         value = value << (shiftFac * 2);
-        int_t difference = value - filtered;
         filtered = filtered + ((value - filtered) >> shiftFac);
         return (filtered + fixedPointAHalf) >> (shiftFac * 2);
     }

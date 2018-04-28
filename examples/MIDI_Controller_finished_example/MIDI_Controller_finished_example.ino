@@ -16,7 +16,7 @@
   Written by tttapa, 07-09-2017
   https://github.com/tttapa/MIDI_controller
 */
-
+#define USE_ROTARY_ENCODER
 #include <MIDI_Controller.h>
 
 const uint8_t velocity = 0b01111111; // The velocity of the buttons (0b01111111 = 127 = 100%)

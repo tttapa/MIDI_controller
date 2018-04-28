@@ -16,7 +16,7 @@
   Written by Pieter P, 22-08-2017
   https://github.com/tttapa/MIDI_controller
 */
-
+#define USE_ROTARY_ENCODER
 #include <MIDI_Controller.h>
 
 const uint8_t Channel = 1;       // MIDI channel 1
