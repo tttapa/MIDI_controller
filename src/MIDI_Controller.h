@@ -14,6 +14,7 @@
 #include "./MIDI_Outputs/Analog.h"
 #include "./MIDI_Outputs/ButtonMatrix.h"
 #include "./MIDI_Outputs/Digital.h"
+#include "./MIDI_Outputs/DigitalCC.h"
 #include "./MIDI_Outputs/DigitalLatch.h"
 #ifdef USE_ROTARY_ENCODER
 #include "./MIDI_Outputs/RotaryEncoder.hpp"
