@@ -78,14 +78,14 @@ Install it using the Arduino IDE's library manager (Sketch > Include Library > M
 
 If you're using a Teensy board, you have to install the Arduino core for Teensy (aka *Teensyduino*). Download it [here](https://www.pjrc.com/teensy/td_download.html), if you haven't already.  
 ### Installing Atmel Flip or DFU-programmer (Uno and Mega only)
-The Arduino Uno and Mega don't have native USB support, so they need extra firmware to be installed to the USB-to-Serial chip in order to work as a MIDI device. To flash this firmware, you have to install a DFU programmer. On Windows, you can use [Atmel Flip](http://www.atmel.com/tools/flip.aspx). On OSX and Linux, install *dfu-programmer*.  
+The Arduino Uno and Mega don't have native USB support, so they need extra firmware to be installed to the USB-to-Serial chip in order to work as a MIDI device. To flash this firmware, you have to install a DFU programmer. On Windows, you can use [Atmel Flip](https://www.microchip.com/developmenttools/productdetails.aspx?partno=flip). On OSX and Linux, install *dfu-programmer*.  
 **Windows:**
-Download and install [Atmel Flip](http://www.atmel.com/tools/flip.aspx):
+Download and install [Atmel Flip](https://www.microchip.com/developmenttools/productdetails.aspx?partno=flip):
 1.  Download the latest Java Runtime Environment from the [Java site](https://java.com/en/download/manual.jsp).  
 2.  Run the java installer.  
 3.  Click 'install'.  
 4.  Close the installer when finished.  
-5.  Download 'Flip' from the [Atmel site](http://www.atmel.com/tools/FLIP.aspx).  
+5.  Download 'Flip' from the [Atmel site](https://www.microchip.com/developmenttools/productdetails.aspx?partno=flip).  
 6.  Run the installer.  
 7.  Click 'next'.  
 8.  Accept the terms in the License agreement and click 'next'.  
@@ -127,7 +127,7 @@ When the upload is complete, take a ballpoint pen (or anything conductive) and r
 9.  You should get a notification that Windows has successfully updated the driver software for   'AT90USB162'.  
 
 **Download the ATmega16U2 firmware:**
-1.  Download the Arduino firmware from the [Arduino GitHub page](https://github.com/arduino/Arduino/blob/master/hardware/arduino/avr/firmwares/atmegaxxu2/arduino-usbserial/): [Arduino-usbserial-atmega16u2-Uno-Rev3.hex](https://raw.githubusercontent.com/arduino/Arduino/master/hardware/arduino/avr/firmwares/atmegaxxu2/arduino-usbserial/Arduino-usbserial-atmega16u2-Uno-Rev3.hex) or [Arduino-usbserial-atmega16u2-Mega2560-Rev3.hex](https://raw.githubusercontent.com/arduino/Arduino/master/hardware/arduino/avr/firmwares/atmegaxxu2/arduino-usbserial/Arduino-usbserial-atmega16u2-Mega2560-Rev3.hex)  
+1.  Download the Arduino firmware from the [Arduino GitHub page](https://github.com/arduino/ArduinoCore-avr/tree/master/firmwares/atmegaxxu2/arduino-usbserial/): [Arduino-usbserial-atmega16u2-Uno-Rev3.hex](https://raw.githubusercontent.com/arduino/ArduinoCore-avr/master/firmwares/atmegaxxu2/arduino-usbserial/Arduino-usbserial-atmega16u2-Uno-Rev3.hex) or [Arduino-usbserial-atmega16u2-Mega2560-Rev3.hex](https://raw.githubusercontent.com/arduino/ArduinoCore-avr/master/firmwares/atmegaxxu2/arduino-usbserial/Arduino-usbserial-atmega16u2-Mega2560-Rev3.hex)  
 2.  Download [Dimitri Diakopoulos's](http://www.dimitridiakopoulos.com/hiduino.html) HIDUINO firmware from [his GitHub page](https://github.com/ddiakopoulos/hiduino/blob/master/compiled_firmwares/arduino_midi.hex): [arduino_midi.hex](https://raw.githubusercontent.com/ddiakopoulos/hiduino/master/compiled_firmwares/arduino_midi.hex)  
 
 **Flash the MIDI firmware:**
