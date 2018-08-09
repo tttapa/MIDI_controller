@@ -12,7 +12,7 @@ Please read the [installation instructions](#installation) first.
 ## Features
 ### Analog inputs
 The library can take input from a variety of analog devices, such as variable resistors, **potentiometers**, linear faders, light **sensors** ...  
-It supports **averaging** the inputs, to get smooth transitions and to reduce noise.  
+It **filters** the inputs and applies hysteresis, to get smooth transitions and to reduce noise.  
 You have full control over the value **mapping**, control curves, and the range of the inputs.  
 **Accuracy up to 10 bits** supported using pitch bend events. 
 
@@ -20,7 +20,7 @@ Analog inputs can be mapped to controls like **volume**, **balance**, **effect p
 
 ### Digital inputs
 The library can be used with a wide range of digital inputs as well, like **pushbuttons**, latching **switches**, footswitches ...  
-Buttons can be **inverted** if necessary.
+Buttons are debounced and can be **inverted** if necessary.
 
 Digital inputs can be mapped to controls like transport control (**play/pause/stop/cue/...** buttons), **mute/solo/rec** buttons, **effect enable/disable**, **looping options**, **sample triggers** ...  
 
@@ -45,6 +45,10 @@ MIDI interfaces on **hardware serial** ports as well as **SoftwareSerial** ports
 
 ### Extended IO
 Use **analog multiplexers** and **shift registers** to save IO pins. Using the Extended IO classes and the ExtIO namespace, you can treat them as if they were normal input/output pins, without having to worry about the actual implementation.
+
+## New in version 3.1.0
+- Improved filtering
+- Header-only rotary encoder classes to remove Encoder.h dependency
 
 ## New in version 3.0.0
 - Completely reworked library structure
