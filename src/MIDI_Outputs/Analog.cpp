@@ -11,9 +11,9 @@ AnalogBase::AnalogBase(pin_t analogPin) : analogPin(analogPin) {} // Constructor
 void AnalogBase::refresh() // read the analog value, update the average, map it to a MIDI value, check if it changed since last time, if so, send Control Change message over MIDI
 {
   unsigned int input = ExtIO::analogRead(analogPin); // read the raw analog input value
+  input = filter.filter(input);                      // apply a low-pass EMA filter
   if (mapFn != nullptr)                              // if a map function is specified
     input = mapFn(input);                            // apply the map function to the value
-  input = filter.filter(input);                      // apply a low-pass EMA filter
 
   send(input);
 }
