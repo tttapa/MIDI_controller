@@ -41,7 +41,7 @@ void ButtonMatrix<nb_rows, nb_cols>::refresh()
             if (state != getPrevState(col, row))    // if the state changed since last time
             {
                 // send it over MIDI
-                uint8_t note = addresses[col][row];
+                uint8_t note = addresses[row][col];
                 MIDI_Controller.MIDI()->send(state ? NOTE_OFF : NOTE_ON, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
                 setPrevState(col, row, state); // remember the state
             }

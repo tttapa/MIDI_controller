@@ -46,8 +46,8 @@ MIDI_CC	KEYWORD1
 #######################################
 refresh	KEYWORD2
 
-setDefault
-getDefault
+setDefault	KEYWORD2
+getDefault	KEYWORD2
 
 average	KEYWORD2
 map	KEYWORD2
