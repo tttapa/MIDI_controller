@@ -1,7 +1,6 @@
-#ifndef BUTTONMATRIX_CPP_
-#define BUTTONMATRIX_CPP_
+#ifndef BUTTONMATRIX_IPP_
+#define BUTTONMATRIX_IPP_
 
-#include "./ButtonMatrix.h"
 #include "../MIDI_Controller/MIDI_Controller_Class.h"
 
 // public:
@@ -102,4 +101,4 @@ void ButtonMatrix<nb_rows, nb_cols>::setPrevState(uint8_t col, uint8_t row, bool
         prevStates[bitsToIndex(bits)] &= ~bitsToBitmask(bits);
 }
 
-#endif // BUTTONMATRIX_CPP_
+#endif // BUTTONMATRIX_IPP_
