@@ -5,6 +5,7 @@ using namespace ExtIO;
 int AnalogMultiplex::digitalRead(pin_t pin)
 {
     setMuxAddress(pinToMuxAddress(pin));
+    delayMicroseconds(5);
     return ExtIO::digitalRead(analogPin);
 }
 analog_t AnalogMultiplex::analogRead(pin_t pin)
