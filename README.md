@@ -18,8 +18,9 @@ It adds support for MIDI input, SysEx, the Mackie Control Universal protocol, VU
 
 ## Support
 
-I'll try to provide limited support for the MIDI Controller library for the coming months, but I won't be adding any new features.  
+I no longer offer support for the MIDI Controller library, and I won't be adding any new features.  
 For new projects, it is **highly recommended** to use the Control Surface library instead of the MIDI Controller library.  
+Control Surface is well-supported, and new features are added regularly. It completely replaces MIDI Controller.    
 If you need help porting your existing MIDI Controller project to Control Surface, feel free to open an issue.
 
 ## Download
